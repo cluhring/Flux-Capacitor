@@ -1,0 +1,18 @@
+<div class='address-search' id="address1">
+  <%= form_tag("/welcome", method: "get") do %>
+  <%= label_tag("Starting Point") %><br>
+  <%= text_field_tag(:map_address, "Starting Address") %>
+</div><br>
+<div class='address-search' id="address2">
+  <%= label_tag("Ending Point") %><br>
+  <%= text_field_tag(:map_address, "Ending Address") %>
+  <%= submit_tag("Submit") %>
+  <% end %>
+</div>
+
+<div class='map' id='map'>
+<script>
+L.mapbox.accessToken = '<%= Rails.application.secrets.mapbox_token %>';
+var map = L.mapbox.map('map', 'cluhring.lc04leg6')
+</script>
+</div>
