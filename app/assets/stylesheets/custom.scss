@@ -24,6 +24,7 @@ body {
 }
 
 .map {
+  left: 20px;
   height: 675px;
 }
 
@@ -41,11 +42,10 @@ body {
 .routing {
   border: bold;
   border-style: solid;
-  border-radius: 35px;
+  border-radius: 5px;
   border-color: #40BC40;
   padding-bottom: 40px;
-  left: 12px;
-  width: max-content;
+  left: 25px;
 }
 
 #logo {
