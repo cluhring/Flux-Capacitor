@@ -1,18 +1,37 @@
-<div class='address-search' id="address1">
-  <%= form_tag("/welcome", method: "get") do %>
-  <%= label_tag("Starting Point") %><br>
-  <%= text_field_tag(:map_address, "Starting Address") %>
-</div><br>
-<div class='address-search' id="address2">
-  <%= label_tag("Ending Point") %><br>
-  <%= text_field_tag(:map_address, "Ending Address") %>
-  <%= submit_tag("Submit") %>
-  <% end %>
-</div>
+<div class="row">
+  <div class="container routing col-md-2">
+    <div class='address-search' id="address1">
+      <%= form_tag("/welcome", method: "get") do %>
+      <%= label_tag("Trip Planner:") %><br><br>
+      <%= text_field_tag(:map_address1, "Starting Address") %><br><br>
+      <!-- <%= label_tag("Ending Point") %><br> -->
+      <%= text_field_tag(:map_address2, "Ending Address") %><br><br>
+      <button id="aa" class="btn btn-default">Add Another Address</button>
+      <button type="submit" class="btn btn-default">Map It Out!</button>
+      <% end %>
+    </div>
+    <div id='logo'>
+      <%= image_tag "green_car5.jpg" %>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class='map' id='map'>
+      <script>
+      L.mapbox.accessToken = '<%= Rails.application.secrets.mapbox_token %>';
+      var map = L.mapbox.map('map', 'cluhring.lc04leg6')
+      map.locate({setView: true, maxZoom: 11});
 
-<div class='map' id='map'>
-<script>
-L.mapbox.accessToken = '<%= Rails.application.secrets.mapbox_token %>';
-var map = L.mapbox.map('map', 'cluhring.lc04leg6')
-</script>
+      function onLocationFound(e) {
+        var radius = e.accuracy / 2;
+
+        L.marker(e.latlng).addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+        L.circle(e.latlng, radius).addTo(map);
+      }
+
+      map.on('locationfound', onLocationFound);
+      </script>
+    </div>
+  </div>
 </div>

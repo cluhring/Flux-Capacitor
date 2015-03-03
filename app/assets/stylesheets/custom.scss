@@ -1,13 +1,55 @@
 body {
-    background-color: #000066;
+  background-color: #ffffff;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  // background-image: url('green_car1.jpg');
+  // background-repeat: no-repeat;
+  // background-position: left bottom;
+  // background-size: 230px;
+}
+
+.address-search {
+  text-align: left;
+  padding-top: 30px;
+  padding-left: 5px;
+}
+
+#map_address1 {
+  width: 200px;
+  text-align: center
+}
+
+#map_address2 {
+  width: 200px;
+  text-align: center
 }
 
 .map {
-  height: 700px;
-  width: 80%;
-  padding:5;
-  border: none;
-  float:right;
-  top: 50px;
-  bottom:0
+  height: 800px;
+}
+
+.nav-head {
+  background-color: #ffffff;
+  width: 100%;
+  color: #40BC40;
+  // opacity: 0.4;
+}
+
+.nav {
+  padding: 10px 15px;
+}
+
+.routing {
+  border: bold;
+  border-style: solid;
+  border-radius: 35px;
+  border-color: #40BC40;
+  padding-bottom: 40px;
+  left: 12px;
+  width: max-content;
+}
+
+#logo {
+  position: absolute;
+  padding-left: 25px;
+  padding-top: 250px;
 }
