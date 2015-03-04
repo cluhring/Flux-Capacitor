@@ -3,15 +3,13 @@
 <head>
   <title>FluxCapacitor</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Flux Capacitor Map</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <meta charset=utf-8 />
-  <title>Flux Capacitor Map</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
 </head>
 <body>
 
@@ -20,12 +18,10 @@
       <nav>
         <ul class="nav nav-pills pull-right">
           <li id="navbar-right" class="navbar-collapse collapse">
-            <a class="btn btn-block btn-social btn-lg btn-facebook" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-lg']);"><i class="fa fa-facebook"></i>Sign in with Facebook</a>
-            <!-- link_to "Login with Facebook", "/auth/facebook", -->
+            <a href="/auth/facebook" class="btn btn-block btn-social btn-lg btn-facebook" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-lg']);"><i class="fa fa-facebook"></i>Sign in with Facebook</a>
           </li>
           <li id="navbar-right" class="navbar-collapse collapse">
-            <a class="btn btn-block btn-social btn-lg btn-twitter" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-lg']);"><i class="fa fa-twitter"></i>Sign in with Twitter</a>
-            <!-- link_to "Login with Twitter", "/auth/twitter", -->
+            <%= link_to('Logout', logout_path, :method => :delete, class: "btn btn-lg btn-default btn-home") %>
           </li>
         </ul>
       </nav>
@@ -37,4 +33,6 @@
 <%= yield %>
 
 </body>
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </html>

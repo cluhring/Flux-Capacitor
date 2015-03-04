@@ -1,4 +1,9 @@
-<br><br><br>
+<div class="container-fluid container-home">
+    <h1 class="home">Welcome <%= current_user.first_name %></h1>
+    <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image" %>
+  </div>
+  <div class="col-md-2"></div>
+</div>
 <h2>Past Trips</h2>
 <table class="table">
   <tr><th></th><th>Starting Point</th><th>Ending Point</th><th>Distance Traveled</th><th>Date Completed</th><th>Pictures</th></tr>
