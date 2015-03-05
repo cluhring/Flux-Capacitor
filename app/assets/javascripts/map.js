@@ -96,12 +96,13 @@ var geojsonFeatures = [{
     "popupContent": "National Renewable Energy Laboratory - Denver West<br>15013 Denver West Pkwy, Golden, CO 80401",
     "icon": {
       "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+      // "iconUrl": 'https://http://flux-capacitor.herokuapp.com/assets/EV.jpg',
       "iconSize": [64, 64]
+      }
     },
   "geometry": {
     "type": "Point",
     "coordinates": [-105.168527, 39.7408399]
-  }
   },
 }];
 
