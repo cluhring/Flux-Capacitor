@@ -134,7 +134,8 @@ class Seed
                               id: 635,
                               updated_at: "2012-09-14T18:25:45Z",
                               distance: 0.09922)
-    station4 = Station.create(      "access_days_time": null,
+
+    station4 = Station.create(access_days_time: null,
                               bd_blends: null,
                               cards_accepted: null,
                               city: "Golden",

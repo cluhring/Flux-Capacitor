@@ -18,23 +18,66 @@ var map = L.mapbox.map('map', 'cluhring.lc04leg6')
 
 
 
-
 function onEachFeature(feature, layer) {
-  // does this feature have a property named popupContent?
   if (feature.properties && feature.properties.popupContent) {
     layer.bindPopup(feature.properties.popupContent);
   }
 }
 
+var myLayer = L.mapbox.featureLayer().addTo(map);
+
 var geojsonFeatures = [{
   "type": "Feature",
+  "fuel_type_code": "E85",
   "properties": {
     "stationName": "Propel Fuels",
     "streetAddress": "39707 Paseo Padre Pkwy",
     "city": "Fremont",
     "state": "CA",
     "zip": "94538",
-    "popupContent": "Propel Fuels<br>39707 Paseo Padre Pkwy, Fremont, CA 94538"
+    "popupContent": "Propel Fuels<br>39707 Paseo Padre Pkwy, Fremont, CA 94538",
+    "icon": {
+      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+      "iconSize": [64, 64]
+    }
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-121.9717542, 37.5486034]
+  }
+}, {
+  "type": "Feature",
+  "fuel_type_code": "E85",
+  "properties": {
+    "stationName": "Pacific Pride - Boyett Petroleum",
+    "streetAddress": "401 9th St",
+    "city": "Modesto",
+    "state": "CA",
+    "zip": "95350",
+    "popupContent": "Pacific Pride - Boyett Petroleum<br>401 9th St, Modesto, CA 95350",
+    "icon": {
+      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+      "iconSize": [64, 64]
+    }
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-120.9944148, 37.634028]
+  }
+}, {
+  "type": "Feature",
+  "fuel_type_code": "CNG",
+  "properties": {
+    "stationName": "Clean Energy - Valero #4086",
+    "streetAddress": "1001 Broadway St",
+    "city": "Denver",
+    "state": "CO",
+    "zip": "80204",
+    "popupContent": "Clean Energy - Valero #4086<br>1001 Broadway St, Denver, CO 80204",
+    "icon": {
+      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+      "iconSize": [64, 64]
+    }
   },
   "geometry": {
     "type": "Point",
@@ -42,39 +85,39 @@ var geojsonFeatures = [{
   }
 }, {
   "type": "Feature",
-  "properties": {
-    "name": "l2",
-    "popupContent": "Denver Love Shack"
-  },
+  // "fuel_type_code": "ELEC",
+  // "icon": {
+  //   "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+  //   "iconSize": [64, 64]
   "geometry": {
     "type": "Point",
-    "coordinates": [-105.107292, 39.6710978]
-  }
-}, {
-  "type": "Feature",
-  "properties": {
-    "name": "l3",
-    "popupContent": "Denver Mountain Retreat"
+    "coordinates": [-105.168527, 39.7408399]
   },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [-104.988, 39.73233]
-  }
-}, {
-  "type": "Feature",
   "properties": {
-    "name": "l4",
-    "popupContent": "Brooklyn, Brooklyn, we go hard"
+    // "stationName": "National Renewable Energy Laboratory - Denver West",
+    // "streetAddress": "15013 Denver West Pkwy",
+    // "city": "Golden",
+    // "state": "CO",
+    // "zip": "80401",
+    // "popupContent": "National Renewable Energy Laboratory - Denver West<br>15013 Denver West Pkwy, Golden, CO 80401",
+    "icon": {
+      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+      "iconSize": [64, 64]
+    }
   },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [-74.131798, 40.624944]
-  }
 }];
+
+myLayer.on('layeradd', function(e) {
+  var marker = e.layer,
+  feature = marker.feature;
+
+  marker.setIcon(L.icon(feature.properties.icon));
+});
+
+myLayer.setGeoJSON(geojsonFeatures);
 
 L.geoJson(geojsonFeatures, {
   onEachFeature: onEachFeature,
-  // fitBounds: true
 }).addTo(map);
 
 // L.geoJson(geojsonFeatures, {
@@ -82,7 +125,6 @@ L.geoJson(geojsonFeatures, {
 //     return feature.properties.show_on_map;
 //   }
 // }).addTo(map);
-
 
 
 
