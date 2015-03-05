@@ -1,6 +1,6 @@
-// L.mapbox.accessToken = 'pk.eyJ1IjoiY2x1aHJpbmciLCJhIjoiNWF2Z1l6ZyJ9.8peAq7kTQyvXShlVv1K82w';
+L.mapbox.accessToken = 'pk.eyJ1IjoiY2x1aHJpbmciLCJhIjoiNWF2Z1l6ZyJ9.8peAq7kTQyvXShlVv1K82w';
 // L.mapbox.accessToken = '<%= Rails.application.secrets.mapbox_token %>';
-L.mapbox.accessToken = "ENV['mapbox_token']";
+// L.mapbox.accessToken = "ENV['facebook_secret']";
 var map = L.mapbox.map('map', 'cluhring.lc04leg6')
 
 // map.locate({setView: true, maxZoom: 11});
@@ -87,10 +87,6 @@ var geojsonFeatures = [{
 }, {
   "type": "Feature",
   "fuel_type_code": "ELEC",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [-105.168527, 39.7408399]
-  },
   "properties": {
     "stationName": "National Renewable Energy Laboratory - Denver West",
     "streetAddress": "15013 Denver West Pkwy",
@@ -101,7 +97,11 @@ var geojsonFeatures = [{
     "icon": {
       "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
       "iconSize": [64, 64]
-    }
+    },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-105.168527, 39.7408399]
+  }
   },
 }];
 
