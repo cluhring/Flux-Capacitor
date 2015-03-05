@@ -85,21 +85,18 @@ var geojsonFeatures = [{
   }
 }, {
   "type": "Feature",
-  // "fuel_type_code": "ELEC",
-  // "icon": {
-  //   "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
-  //   "iconSize": [64, 64]
+  "fuel_type_code": "ELEC",
   "geometry": {
     "type": "Point",
     "coordinates": [-105.168527, 39.7408399]
   },
   "properties": {
-    // "stationName": "National Renewable Energy Laboratory - Denver West",
-    // "streetAddress": "15013 Denver West Pkwy",
-    // "city": "Golden",
-    // "state": "CO",
-    // "zip": "80401",
-    // "popupContent": "National Renewable Energy Laboratory - Denver West<br>15013 Denver West Pkwy, Golden, CO 80401",
+    "stationName": "National Renewable Energy Laboratory - Denver West",
+    "streetAddress": "15013 Denver West Pkwy",
+    "city": "Golden",
+    "state": "CO",
+    "zip": "80401",
+    "popupContent": "National Renewable Energy Laboratory - Denver West<br>15013 Denver West Pkwy, Golden, CO 80401",
     "icon": {
       "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
       "iconSize": [64, 64]
@@ -119,6 +116,27 @@ myLayer.setGeoJSON(geojsonFeatures);
 L.geoJson(geojsonFeatures, {
   onEachFeature: onEachFeature,
 }).addTo(map);
+
+var alls = new L.LayerGroup();
+var bds = new L.LayerGroup();
+var cngs = new L.LayerGroup();
+var e85s = new L.LayerGroup();
+var elecs = new L.LayerGroup();
+var hys = new L.LayerGroup();
+var lngs = new L.LayerGroup();
+var lpgs = new L.LayerGroup();
+
+var overlays = {
+  "ALL": alls,
+  "BD": bds,
+  "CNG": cngs,
+  "E85": e85s,
+  "ELEC": elecs,
+  "HY": hys,
+  "LNG": lngs,
+  "LPG": lpgs,
+};
+L.control.layers(overlays).addTo(map);
 
 // L.geoJson(geojsonFeatures, {
 //   filter: function(feature, layer) {
