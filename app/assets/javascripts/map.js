@@ -17,14 +17,6 @@ var map = L.mapbox.map('map', 'cluhring.lc04leg6')
 // map.on('locationfound', onLocationFound);
 
 
-
-
-function onEachFeature(feature, layer) {
-  if (feature.properties && feature.properties.popupContent) {
-    layer.bindPopup(feature.properties.popupContent);
-  }
-}
-
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
 var geojsonFeatures = [{
@@ -109,15 +101,15 @@ var geojsonFeatures = [{
 myLayer.on('layeradd', function(e) {
   var marker = e.layer,
   feature = marker.feature;
-
+  if (feature.properties && feature.properties.popupContent) {
+  marker.bindPopup(feature.properties.popupContent);
   marker.setIcon(L.icon(feature.properties.icon));
+  }
 });
 
 myLayer.setGeoJSON(geojsonFeatures);
 
-L.geoJson(geojsonFeatures, {
-  onEachFeature: onEachFeature,
-}).addTo(map);
+
 
 var alls = new L.LayerGroup();
 var bds = new L.LayerGroup();
