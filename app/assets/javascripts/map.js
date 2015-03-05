@@ -18,93 +18,104 @@ var map = L.mapbox.map('map', 'cluhring.lc04leg6')
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
-var geojsonFeatures = [{
-  "type": "Feature",
-  "fuel_type_code": "E85",
-  "properties": {
-    "stationName": "Propel Fuels",
-    "streetAddress": "39707 Paseo Padre Pkwy",
-    "city": "Fremont",
-    "state": "CA",
-    "zip": "94538",
-    "popupContent": "Propel Fuels<br>39707 Paseo Padre Pkwy, Fremont, CA 94538",
-    "icon": {
-      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
-      "iconSize": [48, 48]
-    }
-  },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [-121.9717542, 37.5486034]
-  }
-}, {
-  "type": "Feature",
-  "fuel_type_code": "E85",
-  "properties": {
-    "stationName": "Pacific Pride - Boyett Petroleum",
-    "streetAddress": "401 9th St",
-    "city": "Modesto",
-    "state": "CA",
-    "zip": "95350",
-    "popupContent": "Pacific Pride - Boyett Petroleum<br>401 9th St, Modesto, CA 95350",
-    "icon": {
-      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
-      "iconSize": [48, 48]
-    }
-  },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [-120.9944148, 37.634028]
-  }
-}, {
-  "type": "Feature",
-  "fuel_type_code": "CNG",
-  "properties": {
-    "stationName": "Clean Energy - Valero #4086",
-    "streetAddress": "1001 Broadway St",
-    "city": "Denver",
-    "state": "CO",
-    "zip": "80204",
-    "popupContent": "Clean Energy - Valero #4086<br>1001 Broadway St, Denver, CO 80204",
-    "icon": {
-      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
-      "iconSize": [48, 48]
-    }
-  },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [-104.988, 39.73233]
-  }
-}, {
-  "type": "Feature",
-  "fuel_type_code": "ELEC",
-  "properties": {
-    "stationName": "National Renewable Energy Laboratory - Denver West",
-    "streetAddress": "15013 Denver West Pkwy",
-    "city": "Golden",
-    "state": "CO",
-    "zip": "80401",
-    "popupContent": "National Renewable Energy Laboratory - Denver West<br>15013 Denver West Pkwy, Golden, CO 80401",
-    "icon": {
-      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
-      // "iconUrl": 'http://flux-capacitor.herokuapp.com/assets/images/EV.jpg',
-      "iconSize": [48, 48]
+// inside features
+// [ <% @stations.each do |station| %>
+// <%= station.longitude %>
+// <% end %>
+// ]
+var geojson = [
+{
+  "type": "FeatureCollection",
+  "features": [ <% @stations.each do |stat| %>
+  {
+    "type": "Feature",
+    "properties":
+    {
+      "popupContent": "<%= stat.station_name %>",
+      "icon": {
+        "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+        "iconSize": [48, 48]
       }
     },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [-105.168527, 39.7408399]
-  },
-}];
-
-myLayer.on('layeradd', function(e) {
-  var marker = e.layer,
-  feature = marker.feature;
-  if (feature.properties && feature.properties.popupContent) {
-  marker.bindPopup(feature.properties.popupContent);
-  marker.setIcon(L.icon(feature.properties.icon));
+    "geometry":
+    {
+      "type": "Point",
+      "coordinates": [
+        <%= stat.longitude %>,
+        <%= stat.latitude %>
+        ]
+    }
+    <% end %> ]
   }
-});
+}];
+// }, {
+//   "type": "Feature",
+//   "fuel_type_code": "E85",
+//   "properties": {
+//     "stationName": "Pacific Pride - Boyett Petroleum",
+//     "streetAddress": "401 9th St",
+//     "city": "Modesto",
+//     "state": "CA",
+//     "zip": "95350",
+//     "popupContent": "Pacific Pride - Boyett Petroleum<br>401 9th St, Modesto, CA 95350",
+//     "icon": {
+//       "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+//       "iconSize": [48, 48]
+//     }
+//   },
+//   "geometry": {
+//     "type": "Point",
+//     "coordinates": [-120.9944148, 37.634028]
+//   }
+// }, {
+//   "type": "Feature",
+//   "fuel_type_code": "CNG",
+//   "properties": {
+//     "stationName": "Clean Energy - Valero #4086",
+//     "streetAddress": "1001 Broadway St",
+//     "city": "Denver",
+//     "state": "CO",
+//     "zip": "80204",
+//     "popupContent": "Clean Energy - Valero #4086<br>1001 Broadway St, Denver, CO 80204",
+//     "icon": {
+//       "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+//       "iconSize": [48, 48]
+//     }
+//   },
+//   "geometry": {
+//     "type": "Point",
+//     "coordinates": [-104.988, 39.73233]
+//   }
+// }, {
+//   "type": "Feature",
+//   "fuel_type_code": "ELEC",
+//   "properties": {
+//     "stationName": "National Renewable Energy Laboratory - Denver West",
+//     "streetAddress": "15013 Denver West Pkwy",
+//     "city": "Golden",
+//     "state": "CO",
+//     "zip": "80401",
+//     "popupContent": "National Renewable Energy Laboratory - Denver West<br>15013 Denver West Pkwy, Golden, CO 80401",
+//     "icon": {
+//       "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+//       // "iconUrl": 'http://flux-capacitor.herokuapp.com/assets/images/EV.jpg',
+//       "iconSize": [48, 48]
+//       }
+//     },
+//   "geometry": {
+//     "type": "Point",
+//     "coordinates": [-105.168527, 39.7408399]
+//   },
+// }];
+
+// myLayer.on('layeradd', function(e) {
+//   var marker = e.layer,
+//   feature = marker.feature;
+//   if (feature.properties && feature.properties.popupContent) {
+//   marker.bindPopup(feature.properties.popupContent);
+//   marker.setIcon(L.icon(feature.properties.icon));
+//   }
+// });
 
 myLayer.setGeoJSON(geojsonFeatures);
 
