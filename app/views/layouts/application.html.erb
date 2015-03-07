@@ -10,8 +10,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <meta charset=utf-8 />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
 <body>
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash-#{name}" %>
+<% end %>
   <div class="container nav-head col-md-12">
     <div class="header">
       <nav>
@@ -32,6 +37,4 @@
 <%= yield %>
 
 </body>
-<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </html>
