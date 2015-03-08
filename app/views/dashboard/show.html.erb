@@ -1,7 +1,8 @@
-<div class="container-fluid container-home">
-    <h1 class="home">Welcome <%= current_user.first_name %></h1>
-    <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image" %>
+<%= render partial: "nav_bar" %><br><br>
+<div class="container-fluid container-home col-md-12">
+    <h1 class="home">Welcome <%= current_user.first_name %>  <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image" %></h1>
 </div>
+<div class="trip-tables">
 <h2>Past Trips</h2>
 <table class="table">
   <tr><th></th><th>Starting Point</th><th>Ending Point</th><th>Distance Traveled</th><th>Date Completed</th><th>Pictures</th></tr>
@@ -35,11 +36,6 @@
       </td>
     </tr>
 </table>
-
-<div class="col-md-2">
-  <div id='logo'>
-    <%= image_tag "green_car5.jpg" %>
-  </div>
 </div>
 
 <!-- <div

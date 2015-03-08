@@ -1,15 +1,6 @@
 body {
   background-color: #ffffff;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  // background-image: url('green_car1.jpg');
-  // background-repeat: no-repeat;
-  // background-position: left bottom;
-  // background-size: 230px;
-}
-
-.address-search {
-  text-align: left;
-  padding-top: 30px;
 }
 
 #map_address {
@@ -28,37 +19,52 @@ body {
 }
 
 .map {
-  left: 20px;
-  height: 675px;
-  width: 97%;
+  min-height: 750px;
+  width: 100%;
 }
 
 .nav-head {
-  background-color: #ffffff;
-  width: 100%;
-  color: #40BC40;
-  // opacity: 0.4;
+  // background-color: #40BC40;
+  opacity: 0.4;
+  left: 15px;
 }
 
-.nav {
-  padding: 10px 15px;
+.header {
+  width: 100%;
+  // color: #ffffff;
+  position: absolute;
+  top: 0px;
 }
 
 .routing {
-  border: bold;
-  border-style: solid;
-  border-radius: 5px;
-  border-color: #40BC40;
-  padding-bottom: 40px;
-  left: 25px;
+  // border: bold;
+  // border-style: solid;
+  // border-radius: 5px;
+  // border-color: #40BC40;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  left: 10px;
+  text-align: left;
+  position: absolute;
+  top: 190px;
 }
 
 #logo {
-  position: absolute;
-  padding-left: 25px;
-  padding-top: 250px;
+  position: center;
+  text-align: center;
+  top: 5px;
 }
 
 h2 {
   text-align: center;
+}
+
+.container-home {
+  position: center;
+  text-align: center;
+}
+
+.trip-tables {
+  position: relative;
+  top: 100px;
 }

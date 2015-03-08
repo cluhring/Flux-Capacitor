@@ -1,0 +1,12 @@
+<div class='address-search' id="address1">
+  <%= form_tag("/welcome", method: "get") do %>
+  <%= label_tag("Starting Point") %><br>
+  <%= text_field_tag "map_address1", "Address, City, State, and/or Zip",
+  :onclick => 'if($(this).val()=="Address, City, State, and/or Zip"){$(this).val("");};' %>
+  <%= label_tag("Ending Point") %><br>
+  <%= text_field_tag "map_address2", "Address, City, State, and/or Zip",
+  :onclick => 'if($(this).val()=="Address, City, State, and/or Zip"){$(this).val("");};' %><br>
+  <button id="bb" type="submit" class="btn btn-default">Map It Out!</button>
+  <% end %>
+  <button id="aa" class="btn btn-default">Add Another Destination</button><br>
+</div>
