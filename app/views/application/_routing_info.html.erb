@@ -1,12 +1,36 @@
 <div class='address-search' id="address1">
-  <%= form_tag("/welcome", method: "get") do %>
+  <%= form_tag("/welcome", method: "create") do %>
   <%= label_tag("Starting Point") %><br>
-  <%= text_field_tag "map_address1", "Address, City, State, and/or Zip",
+  <%= text_field_tag "start_address", "Address, City, State, and/or Zip",
   :onclick => 'if($(this).val()=="Address, City, State, and/or Zip"){$(this).val("");};' %>
   <%= label_tag("Ending Point") %><br>
-  <%= text_field_tag "map_address2", "Address, City, State, and/or Zip",
+  <%= text_field_tag "end_address", "Address, City, State, and/or Zip",
   :onclick => 'if($(this).val()=="Address, City, State, and/or Zip"){$(this).val("");};' %><br>
   <button id="bb" type="submit" class="btn btn-default">Map It Out!</button>
   <% end %>
   <button id="aa" class="btn btn-default">Add Another Destination</button><br>
 </div>
+
+<script>
+$(document).ready(function(){
+
+  $("#aa").click(function(){
+
+    $('#start_address').after("<p id='stopping_point'><label for='Starting_Point'>Stopping point</label><input type='text' class='input-large' name='map_address<%address_helper%>' id='map_address' value='Address, City, State, and/or Zip' onclick='if($(this).val()==&quot;Address, City, State, and/or Zip&quot;){$(this).val(&quot;&quot;);};''>"+
+    "<input type='submit' value='' class='stop_point' id='removeStoppingPoint'></p>");
+
+    $("#removeStoppingPoint").on('click', function(){
+      $(this).closest('p').remove();
+
+  });
+  });
+});
+
+  // $(".map").height( $(".address-search").height() );
+
+// $('#bb').click(function(){
+//   if($('#map_address2').val()=="Address, City, State, and/or Zip"){
+//     $('#map_address2').remove();
+//   };
+// });
+</script>

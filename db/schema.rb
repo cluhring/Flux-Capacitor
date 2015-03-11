@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305154632) do
+ActiveRecord::Schema.define(version: 20150309200824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 20150305154632) do
   create_table "alt_fuels", force: :cascade do |t|
     t.string "name"
     t.string "description"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.float  "latitude"
+    t.float  "longitude"
+    t.string "address"
   end
 
   create_table "stations", force: :cascade do |t|

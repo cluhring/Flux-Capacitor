@@ -1,5 +1,10 @@
+
 <div class='map' id='map'>
   <script>
+// var L = require('leaflet');
+// require('leaflet-routing-machine'); // Adds L.Routing onto L
+// require('lrm-mapbox');
+
 L.mapbox.accessToken = 'pk.eyJ1IjoiY2x1aHJpbmciLCJhIjoiNWF2Z1l6ZyJ9.8peAq7kTQyvXShlVv1K82w';
 // L.mapbox.accessToken = '<%= Rails.application.secrets.mapbox_token %>';
 // L.mapbox.accessToken = "ENV['facebook_secret']";
@@ -12,11 +17,15 @@ var geojsonFeatures = [
   {
   "type": "Feature",
   "properties": {
-    "popupContent": "<%= station.station_name %><br><%= station.street_address %>, <%= station.city %>, <%= station.state %> <%= station.zip %>",
-    "icon": {
-      "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
-      "iconSize": [48, 48]
-    }
+    "url":"<%= request.env['HTTP_HOST']%>/stations/<%= station.id %>",
+    "marker-symbol":"fuel",
+    "marker-size":"medium",
+    "marker-color": "<%= station.fuel_color %>",
+    "popupContent": "<%= station.station_name %><br><%= station.street_address %>, <%= station.city %>, <%= station.state %> <%= station.zip %>"
+    // "icon": {
+    //   "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
+    //   "iconSize": [48, 48]
+    // }
   },
   "geometry": {
     "type": "Point",
@@ -34,7 +43,7 @@ myLayer.on('layeradd', function(e) {
   feature = marker.feature;
   if (feature.properties && feature.properties.popupContent) {
   marker.bindPopup(feature.properties.popupContent);
-  marker.setIcon(L.icon(feature.properties.icon));
+  // marker.setIcon(L.icon(feature.properties.icon));
   }
 });
 
@@ -50,7 +59,23 @@ var overlays = {
 <% end %>
 };
 
-L.control.layers(overlays).addTo(map);
+L.Routing.control({
+    waypoints: [
+        // L.latLng(39.781, -105.078),
+        // L.latLng(37.77, -122.42),
+    ],
+    routeWhileDragging: true,
+    geocoder: L.Control.Geocoder.nominatim()
+}).addTo(map);
+
+
+
+// L.Control.geocoder().addTo(map);
+
+// L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+//     attribution: '© OpenStreetMap contributors'
+// }).addTo(map);
+
 
 // L.geoJson(geojsonFeatures, {
 //   filter: function(feature, layer) {

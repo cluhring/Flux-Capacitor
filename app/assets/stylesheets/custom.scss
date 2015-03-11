@@ -4,17 +4,17 @@ body {
 }
 
 #map_address {
-  width: 210px;
+  width: 180px;
   text-align: center
 }
 
-#map_address1 {
-  width: 210px;
+#start_address {
+  width: 180px;
   text-align: center
 }
 
-#map_address2 {
-  width: 210px;
+#end_address {
+  width: 180px;
   text-align: center
 }
 
@@ -67,4 +67,10 @@ h2 {
 .trip-tables {
   position: relative;
   top: 100px;
+}
+
+.stop_point {
+  background-image: url(edelete2.jpeg);
+  width: 24px;
+  height: 24px;
 }
