@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'omniauth-facebook'
 gem 'figaro'
 gem 'geocoder'
+gem 'faraday'
 
 group :development, :test do
   gem 'byebug'

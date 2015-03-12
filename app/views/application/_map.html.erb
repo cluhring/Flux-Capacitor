@@ -20,7 +20,7 @@ var geojsonFeatures = [
     "url":"<%= request.env['HTTP_HOST']%>/stations/<%= station.id %>",
     "marker-symbol":"fuel",
     "marker-size":"medium",
-    "marker-color": "<%= station.fuel_color %>",
+    // "marker-color": "<%= station.fuel_type_code %>",
     "popupContent": "<%= station.station_name %><br><%= station.street_address %>, <%= station.city %>, <%= station.state %> <%= station.zip %>"
     // "icon": {
     //   "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
@@ -38,11 +38,16 @@ var geojsonFeatures = [
 <% end %>
 ];
 
+// var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+//                         feature.properties.popupContent +
+//                     '</a>';
+
 myLayer.on('layeradd', function(e) {
   var marker = e.layer,
   feature = marker.feature;
   if (feature.properties && feature.properties.popupContent) {
   marker.bindPopup(feature.properties.popupContent);
+  // marker.bindPopup(feature.properties.url);
   // marker.setIcon(L.icon(feature.properties.icon));
   }
 });
