@@ -1,6 +1,10 @@
-<p><%= @station.fuel_type_code %></p>
-<p><%= @station.station_name %></p>
-<p><%= @station.street_address %></p>
-<p><%= @station.city %> <%= @station.state %><%= @station.zip %></p>
-<p><%= @station.station_phone %></p>
-<p><%= @station.county_id %></p>
+<p><%= @station.alt_fuel_station["id"] %></p>
+<p><%= @station.alt_fuel_station["fuel_type_code"] %></p>
+<p><%= @station.alt_fuel_station["station_name"] %></p>
+<p><%= @station.alt_fuel_station["street_address"] %></p>
+<p><%= @station.alt_fuel_station["city"] %>, <%= @station.alt_fuel_station["state"] %> <%= @station.alt_fuel_station["zip"] %></p>
+<p><%= @station.alt_fuel_station["station_phone"] %></p>
+
+<% ["id", "fuel_type_code", "station_name"].each do |param| %>
+<p><%= param %>: <%= @station.alt_fuel_station[param] %></p>
+<% end %>

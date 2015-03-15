@@ -1,16 +1,12 @@
 class WelcomeController < ApplicationController
-  def index
-    @stations = Station.all
-    @alt_fuels = AltFuel.all
-  end
 
   def create
     @start_location = Location.create(:address => params[:start_address])
     @end_location = Location.create(:address => params[:end_address])
-    redirect_to root_path
+    redirect_to stations_path
   end
 
-  
+
 
   # private
   #

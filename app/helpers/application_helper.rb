@@ -1,10 +1,7 @@
 module ApplicationHelper
-  def address_helper
-    (0..20).map { |num| [num, num] }
-  end
 
-  def fuel_color_helper
-    case station.fuel_type_code
+  def fuel_color_helper(fuel_type)
+    case fuel_type
       when "BD"
       "#FFA500" #Orange
       when "CNG"
@@ -21,4 +18,5 @@ module ApplicationHelper
       "#FF0000" #Red
     end
   end
+
 end
