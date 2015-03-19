@@ -1,4 +1,3 @@
-
 <div class='map' id='map'>
   <script>
 // var L = require('leaflet');
@@ -12,16 +11,8 @@ var map = L.mapbox.map('map', 'cluhring.lc04leg6')
 
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
-L.Routing.control({
-    waypoints: [
-
-    ],
-    routeWhileDragging: true,
-    geocoder: L.Control.Geocoder.nominatim()
-}).addTo(map);
-
 var geojsonFeatures = [
-  <% @stations.each do |station| %>
+  <% @closest_stations_to_route.each do |station| %>
   {
   "type": "Feature",
   "properties": {
@@ -50,7 +41,7 @@ myLayer.on('layeradd', function(e) {
   var marker = e.layer,
     feature = marker.feature;
 
-  var popupContent =  '<a target="_blank" class="popup" href="' +
+  var popupContent =  '<a class="popup" href="http://' +
     feature.properties.url + '">' +
                           feature.properties.stationDetails +
                       '</a>';
@@ -62,16 +53,29 @@ myLayer.on('layeradd', function(e) {
 
 myLayer.setGeoJSON(geojsonFeatures);
 
-<% @alt_fuels.each do |alt_fuel| %>
-var <%= alt_fuel.name %> = new L.LayerGroup();
-<% end %>
+// <#% @alt_fuels.each do |alt_fuel| %>
+// var <#%= alt_fuel.name %> = new L.LayerGroup();
+// <#% end %>
+//
+// var overlays = {
+// <#% @alt_fuels.each do |alt_fuel| %>
+// "<#%= alt_fuel.name %>": <#%= alt_fuel.name %> ,
+// <#% end %>
+// };
 
-var overlays = {
-<% @alt_fuels.each do |alt_fuel| %>
-"<%= alt_fuel.name %>": <%= alt_fuel.name %> ,
-<% end %>
-};
+var ctrl = L.Routing.control({
+    waypoints: [
+      L.latLng (39.749747, -104.999977),
+      L.latLng (41.87, -87.63)
+    ],
+    routeWhileDragging: true,
+    draggableWaypoints: true,
+    geocoder: L.Control.Geocoder.nominatim()
+}).addTo(map);
 
+L.DomEvent.on(L.DomUtil.get('clear-wps'), 'click', function() {
+    ctrl.setWaypoints([]);
+});
 
 // L.Control.geocoder().addTo(map);
 
@@ -87,11 +91,17 @@ var overlays = {
 // }).addTo(map);
 
 
-map.locate({setView: true, maxZoom: 11});
+map.locate();
 
 function onLocationFound(e) {
   var radius = e.accuracy / 2;
-
+  var current_lat = e.latlng.lat;
+  var current_long = e.latlng.lng;
+  $.ajax ({
+    data: { latitude: current_lat, longitude: current_long },
+    type: 'post',
+    url: '/welcome'
+  });
   L.marker(e.latlng).addTo(map)
   .bindPopup("You are here").openPopup();
 
@@ -102,3 +112,4 @@ map.on('locationfound', onLocationFound);
 
 </script>
 </div>
+<!-- <button id="clear-wps" type="button">Clear</button> -->

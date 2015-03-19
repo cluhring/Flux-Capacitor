@@ -1,26 +1,12 @@
 <div class="header">
 <div class="row">
-  <div class= "container col-md-2" id='logo'>
+  <div class= "container col-md-3" id='logo'>
     <h3>
       <a id="navbar-left" class="navbar-collapse collapse" href="/">Flux Capacitor</a>
     </h3>
     <%= image_tag "green_car5.jpg" %>
   </div>
-  <div class="nav-head col-md-10">
-      <nav>
-        <ul class="nav nav-pills pull-right">
-          <li id="navbar-right" class="navbar-collapse collapse">
-          <% if current_user.nil? %>
-            <a href="/auth/facebook" class="btn btn-block btn-social btn-lg btn-facebook" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-lg']);"><i class="fa fa-facebook"></i>Sign in with Facebook</a>
-          <% end %>
-          </li>
-          <li id="navbar-right" class="navbar-collapse collapse">
-            <% if current_user %>
-            <%= link_to('Logout', logout_path, :method => :delete, class: "btn btn-lg btn-default btn-home") %>
-            <% end %>
-          </li>
-        </ul>
-      </nav>
+  <div class="col-md-9">
   </div>
 </div>
 </div>

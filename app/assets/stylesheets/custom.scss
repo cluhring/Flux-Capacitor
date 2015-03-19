@@ -1,21 +1,43 @@
+html, body {
+    height: 100%;
+}
 body {
   background-color: #ffffff;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-#map_address {
-  width: 180px;
-  text-align: center
+// #map_address {
+//   width: 180px;
+//   text-align: center
+// }
+//
+// #start_address {
+//   width: 180px;
+//   text-align: center
+// }
+//
+// #end_address {
+//   width: 180px;
+//   text-align: center
+// }
+
+
+.station-s {
+  background-image: url(green_car6.jpg);
+  height: 450px;
 }
 
-#start_address {
-  width: 180px;
-  text-align: center
+.station-show {
+  background-color: #f0fff0;
+  float: center;
+  top: 110px;
+  padding-bottom: 10px;
 }
 
-#end_address {
-  width: 180px;
-  text-align: center
+#hey-good-lookin {
+    position:absolute;
+    bottom: 11px;
+    left: 375px;
 }
 
 .map {
@@ -23,10 +45,10 @@ body {
   width: 100%;
 }
 
-.nav-head {
-  // background-color: #40BC40;
-  opacity: 0.4;
-  left: 15px;
+#facebook {
+  position: absolute;
+  bottom: 10px;
+  right: -5px;
 }
 
 .header {
@@ -36,17 +58,18 @@ body {
   top: 0px;
 }
 
-.routing {
+.closest_stats {
   // border: bold;
   // border-style: solid;
   // border-radius: 5px;
   // border-color: #40BC40;
-  padding-top: 15px;
+  padding-top: 5px;
   padding-bottom: 15px;
   left: 10px;
   text-align: left;
   position: absolute;
   top: 190px;
+  text-align: center;
 }
 
 #logo {
@@ -73,4 +96,18 @@ h2 {
   background-image: url(edelete2.jpeg);
   width: 24px;
   height: 24px;
+}
+
+.closest_stations {
+  border: bold;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #40BC40;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  // left: 15px;
+  text-align: left;
+  margin-bottom: 5px;
+  // position: absolute;
+  float: center;
 }

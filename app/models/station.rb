@@ -15,7 +15,13 @@ class Station < ActiveRecord::Base
   end
 
   def self.find_closest(lat, long)
-    service.closest_stations["fuel_stations"].map do |station|
+    service.closest_stations(lat, long)["fuel_stations"].map do |station|
+      _build_object(station)
+    end
+  end
+
+  def self.find_closest_to_route
+    service.routed_stations["fuel_stations"].map do |station|
       _build_object(station)
     end
   end
