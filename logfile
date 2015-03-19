@@ -1,2 +1,5 @@
 FATAL:  lock file "postmaster.pid" already exists
 HINT:  Is another postmaster (PID 1905) running in data directory "/usr/local/pgsql/data"?
+LOG:  database system was shut down at 2015-03-19 12:59:11 MDT
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
