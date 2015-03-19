@@ -1,13 +1,10 @@
 <div class="row">
-  <div class="container routing col-md-2">
-    <%= render partial: "routing_info" %>
+  <div class="container closest_stats col-md-3">
+    <%= render partial: "closest_stations" %>
   </div>
-  <div class="col-md-10">
+  <div class="col-md-9">
     <%= render partial: "map" %>
   </div>
 </div>
+<%= render partial: "facebook" %>
 <%= render partial: "nav_bar" %>
-
-<!--
-data = JSON.parse(json)
-data["name"] -->

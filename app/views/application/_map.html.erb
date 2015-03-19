@@ -1,4 +1,3 @@
-
 <div class='map' id='map'>
   <script>
 // var L = require('leaflet');
@@ -13,15 +12,15 @@ var map = L.mapbox.map('map', 'cluhring.lc04leg6')
 var myLayer = L.mapbox.featureLayer().addTo(map);
 
 var geojsonFeatures = [
-  <% @stations.each do |station| %>
+  <% @closest_stations_to_route.each do |station| %>
   {
   "type": "Feature",
   "properties": {
     "url":"<%= request.env['HTTP_HOST']%>/stations/<%= station.id %>",
     "marker-symbol":"fuel",
     "marker-size":"medium",
-    // "marker-color": "<%= station.fuel_type_code %>",
-    "popupContent": "<%= station.station_name %><br><%= station.street_address %>, <%= station.city %>, <%= station.state %> <%= station.zip %>"
+    "marker-color": "<%= fuel_color_helper(station.fuel_type_code) %>",
+    "stationDetails": "<%= station.station_name %><br><%= station.street_address %>, <%= station.city %>, <%= station.state %> <%= station.zip %>"
     // "icon": {
     //   "iconUrl": 'https://pbs.twimg.com/profile_images/444146105312243712/EHdy1GyV_400x400.png',
     //   "iconSize": [48, 48]
@@ -38,42 +37,45 @@ var geojsonFeatures = [
 <% end %>
 ];
 
-// var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
-//                         feature.properties.popupContent +
-//                     '</a>';
-
 myLayer.on('layeradd', function(e) {
   var marker = e.layer,
-  feature = marker.feature;
-  if (feature.properties && feature.properties.popupContent) {
-  marker.bindPopup(feature.properties.popupContent);
+    feature = marker.feature;
+
+  var popupContent =  '<a class="popup" href="http://' +
+    feature.properties.url + '">' +
+                          feature.properties.stationDetails +
+                      '</a>';
+  // if (feature.properties && feature.properties.popupContent) {
+  marker.bindPopup(popupContent);
   // marker.bindPopup(feature.properties.url);
   // marker.setIcon(L.icon(feature.properties.icon));
-  }
 });
 
 myLayer.setGeoJSON(geojsonFeatures);
 
-<% @alt_fuels.each do |alt_fuel| %>
-var <%= alt_fuel.name %> = new L.LayerGroup();
-<% end %>
+// <#% @alt_fuels.each do |alt_fuel| %>
+// var <#%= alt_fuel.name %> = new L.LayerGroup();
+// <#% end %>
+//
+// var overlays = {
+// <#% @alt_fuels.each do |alt_fuel| %>
+// "<#%= alt_fuel.name %>": <#%= alt_fuel.name %> ,
+// <#% end %>
+// };
 
-var overlays = {
-<% @alt_fuels.each do |alt_fuel| %>
-"<%= alt_fuel.name %>": <%= alt_fuel.name %> ,
-<% end %>
-};
-
-L.Routing.control({
+var ctrl = L.Routing.control({
     waypoints: [
-        // L.latLng(39.781, -105.078),
-        // L.latLng(37.77, -122.42),
+      L.latLng (39.749747, -104.999977),
+      L.latLng (41.87, -87.63)
     ],
     routeWhileDragging: true,
+    draggableWaypoints: true,
     geocoder: L.Control.Geocoder.nominatim()
 }).addTo(map);
 
-
+L.DomEvent.on(L.DomUtil.get('clear-wps'), 'click', function() {
+    ctrl.setWaypoints([]);
+});
 
 // L.Control.geocoder().addTo(map);
 
@@ -89,18 +91,25 @@ L.Routing.control({
 // }).addTo(map);
 
 
-// map.locate({setView: true, maxZoom: 11});
-//
-// function onLocationFound(e) {
-//   var radius = e.accuracy / 2;
-//
-//   L.marker(e.latlng).addTo(map)
-//   .bindPopup("You are within " + radius + " meters from this point").openPopup();
-//
-//   L.circle(e.latlng, radius).addTo(map);
-// }
-//
-// map.on('locationfound', onLocationFound);
+map.locate();
+
+function onLocationFound(e) {
+  var radius = e.accuracy / 2;
+  var current_lat = e.latlng.lat;
+  var current_long = e.latlng.lng;
+  $.ajax ({
+    data: { latitude: current_lat, longitude: current_long },
+    type: 'post',
+    url: '/welcome'
+  });
+  L.marker(e.latlng).addTo(map)
+  .bindPopup("You are here").openPopup();
+
+  L.circle(e.latlng, radius).addTo(map);
+}
+
+map.on('locationfound', onLocationFound);
 
 </script>
 </div>
+<!-- <button id="clear-wps" type="button">Clear</button> -->

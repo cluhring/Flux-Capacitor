@@ -1,20 +1,15 @@
 class WelcomeController < ApplicationController
-  def index
-    @stations = Station.all
-    @alt_fuels = AltFuel.all
-  end
 
   def create
-    @start_location = Location.create(:address => params[:start_address])
-    @end_location = Location.create(:address => params[:end_address])
-    redirect_to root_path
+    # session[:latitude] = params[:latitude]
+    # session[:longitude] = params[:longitude]
   end
 
-  
+  def index
+    # @stations = Station.all
+    @closest_stations_to_route = Station.find_closest_to_route
+    # @alt_fuels = AltFuel.all
+    @closest_stations = Station.find_closest(session[:latitude], session[:longitude])
+  end
 
-  # private
-  #
-  # def location_params
-  #   params.slice(:start_address, :map_address, :end_address)
-  # end
 end
