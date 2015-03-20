@@ -25,7 +25,7 @@ class StationService
     end)
   end
 
-  def closest_stations(lat, long)
+  def closest_stations
     parse(connection.get("/api/alt-fuel-stations/v1/nearest.json?") do |req|
       req.params['api_key'] = ENV['nrel_secret']
       req.params['status'] = 'E'

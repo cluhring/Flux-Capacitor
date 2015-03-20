@@ -3,3 +3,11 @@ HINT:  Is another postmaster (PID 1905) running in data directory "/usr/local/pg
 LOG:  database system was shut down at 2015-03-19 12:59:11 MDT
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
+ERROR:  database "flux-capacitor-development" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "flux-capacitor-development"
+ERROR:  database "flux-capacitor-development" already exists
+STATEMENT:  CREATE DATABASE "flux-capacitor-development" ENCODING = 'utf8'
+ERROR:  duplicate key value violates unique constraint "stations_pkey"
+DETAIL:  Key (id)=(635) already exists.
+STATEMENT:  INSERT INTO "stations" ("access_days_time", "cards_accepted", "city", "date_last_confirmed", "fuel_type_code", "geocode_status", "groups_with_access_code", "intersection_directions", "latitude", "longitude", "open_date", "owner_type_code", "plus4", "station_name", "station_phone", "status_code", "street_address", "zip", "state", "ng_fill_type_code", "ng_psi", "ng_vehicle_class", "id", "updated_at", "distance", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26) RETURNING "id"
